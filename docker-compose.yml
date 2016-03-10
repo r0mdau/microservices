@@ -1,0 +1,29 @@
+calculatrice:
+  image: vertx/vertx3
+  expose:
+    - 7000
+  volumes:
+    - ./calculatrice:/root
+  working_dir: /root
+  command: vertx run calculatrice.js
+
+prenom:
+  image: vertx/vertx3
+  expose:
+    - 7001
+  volumes:
+    - ./prenom:/root
+  working_dir: /root
+  command: vertx run prenom.js
+
+gateway:
+  image: node
+  ports:
+    - 8080:8080
+  links:
+    - calculatrice:calculatrice
+    - prenom:prenom
+  volumes:
+    - ./gateway:/root
+  working_dir: /root
+  command: node server.js
