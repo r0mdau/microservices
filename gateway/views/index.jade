@@ -5,5 +5,37 @@ html
     meta(charset="utf-8")
     body
         div(class="container")
-            p Ceci est un message dans une balise html
+            h1 Calculatrice de la mort qui tue
+            select(name="operateur")
+                option(value="addition") addition
+                option(value="soustraction") soustraction
+                option(value="multiplication") multiplication
+                option(value="division") division
+            br
+            | Nombre 1 :
+            input(type="text" name="un")
+            br
+            | Nombre 2 :
+            input(type="text" name="deux")
+            br
+            input(type="submit" id="calculer" value="Calculer")
+            br
+            textarea(type="text" id="resultat")
         script(src="https://code.jquery.com/jquery-2.2.1.min.js")
+        script.
+            $('document').ready(function(){
+                $('#calculer').click(function(){
+                    $.ajax({
+                        url: '/calculatrice',
+                        method: 'POST',
+                        data: {
+                            operateur: $('select[name="operateur"]').val(),
+                            un: $('input[name="un"]').val(),
+                            deux: $('input[name="deux"]').val()
+                        },
+                        success: function(data) {
+                            $('#resultat').val(data);
+                        }
+                    });
+                })
+            });

@@ -4,7 +4,7 @@ var server = vertx.createHttpServer();
 var router = Router.router(vertx);
 
 function encapsulerContenu(valeur) {
-    return JSON.stringify({foo: valeur});
+    return "" + valeur + "";
 }
 
 router.get("/addition/:un/:deux").handler(function (routingContext) {
