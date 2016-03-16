@@ -1,2 +1,2 @@
 exports.protocol = 'http';
-exports.port = '8080';
+exports.port = '80';

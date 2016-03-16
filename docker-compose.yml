@@ -1,7 +1,7 @@
 calculatrice:
   image: vertx/vertx3
   expose:
-    - 7000
+    - 80
   volumes:
     - ./calculatrice:/root
   working_dir: /root
@@ -10,7 +10,7 @@ calculatrice:
 prenom:
   image: vertx/vertx3
   expose:
-    - 7001
+    - 80
   volumes:
     - ./prenom:/root
   working_dir: /root
@@ -19,7 +19,7 @@ prenom:
 gateway:
   image: node
   ports:
-    - 8080:8080
+    - 8080:80
   links:
     - calculatrice:calculatrice
     - prenom:prenom

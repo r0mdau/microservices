@@ -24,22 +24,22 @@ app
     .get('/', function (req, res) {
         res.render('index.jade', {env: env});
     })
-    .get('/prenom/:prenom', function (req, res) {
-        http.get("http://prenom:7001/" + req.params.prenom, function (resource) {
+    .get('/prenom', function (req, res) {
+        http.get("http://api.icndb.com/jokes/random", function (resource) {
             goData(res, resource);
         }).on('error', function (e) {
             console.log(e.message);
         });
     })
     .get('/prenom/nombreDeLettre/:prenom', function (req, res) {
-        http.get("http://prenom:7001/nombreDeLettre/" + req.params.prenom, function (resource) {
+        http.get("http://prenom/nombreDeLettre/" + req.params.prenom, function (resource) {
             goData(res, resource);
         }).on('error', function (e) {
             console.log(e.message);
         });
     })
     .post('/calculatrice', function (req, res) {
-        http.get("http://calculatrice:7000/" + req.body.operateur + "/" + req.body.un + "/" + req.body.deux, function (resource) {
+        http.get("http://calculatrice/" + req.body.operateur + "/" + req.body.un + "/" + req.body.deux, function (resource) {
             goData(res, resource);
         }).on('error', function (e) {
             console.log(e.message);

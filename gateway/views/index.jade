@@ -20,9 +20,21 @@ html
             br
             input(type="submit" id="calculer" value="Calculer")
             br
-            textarea(type="text" id="resultat")
+            h1 Prénom de la mort qui tue
+            | Prénom :
+            input(type="text" name="prenom")
+            br
+            input(type="submit" id="nombreDeLettre" value="Nombre de lettre")
+            br
+            input(type="submit" id="mystere" value="Mystère")
+            hr
+            h1 Boîte à résultats
+            textarea(type="text" id="resultat" rows="4" cols="100")
         script(src="https://code.jquery.com/jquery-2.2.1.min.js")
         script.
+            function ajaxSuccess (data) {
+                $('#resultat').val(data);
+            }
             $('document').ready(function(){
                 $('#calculer').click(function(){
                     $.ajax({
@@ -33,9 +45,22 @@ html
                             un: $('input[name="un"]').val(),
                             deux: $('input[name="deux"]').val()
                         },
-                        success: function(data) {
-                            $('#resultat').val(data);
+                        success: ajaxSuccess
+                    });
+                });
+                $('#nombreDeLettre').click(function(){
+                    $.ajax({
+                        url: '/prenom/nombreDeLettre/' + $('input[name="prenom"]').val(),
+                        success: ajaxSuccess
+                    });
+                });
+                $('#mystere').click(function(){
+                    $.ajax({
+                        url: '/prenom',
+                        success: function (data) {
+                            var obj = JSON.parse(data);
+                            $('#resultat').val(obj.value.joke);
                         }
                     });
-                })
+                });
             });
