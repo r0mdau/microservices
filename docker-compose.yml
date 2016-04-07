@@ -26,4 +26,4 @@ gateway:
   volumes:
     - ./gateway:/root
   working_dir: /root
-  command: node server.js
+  command: bash -c "npm install && node server.js"
